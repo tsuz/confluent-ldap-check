@@ -35,21 +35,21 @@ accordingly and please let me know so that I can adjust it (or/and file a pull r
 
 ### Run with Docker
 
-1. Pull down repo
+Pull down repo
 
 ```sh
 git clone git@github.com:sknop/confluent-ldap-check.git
 ```
 
-2. build with docker compose
+Build with docker compose
 
 ```sh
 docker-compose build
 ```
 
-3. update the environmental variables. The LDAP env vars with dots are replaced with underscores.
+Update the environmental variables in docker-compose.yml. The LDAP env vars with dots are replaced with underscores.
 
-4. bring up the instance
+Bring up the instance
 
 ```sh
 > docker-compose up
