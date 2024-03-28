@@ -21,6 +21,8 @@ echo "ldap.user.search.scope=${ldap_user_search_scope}" >> $CONFIG_FILE
 echo "ldap.user.search.base=${ldap_user_search_base}" >> $CONFIG_FILE
 echo "ldap.user.object.class=${ldap_user_object_class}" >> $CONFIG_FILE
 echo "ldap.user.name.attribute=${ldap_user_name_attribute}" >> $CONFIG_FILE
+echo "ldap.user.memberof.attribute=${ldap_user_memberof_attribute}" >> $CONFIG_FILE
+echo "ldap.user.memberof.attribute.pattern=${ldap_user_memberof_attribute_pattern}" >> $CONFIG_FILE
 
 echo "Verifier Type: $verifier_type"
 echo "Config File:"

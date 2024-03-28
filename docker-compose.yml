@@ -3,7 +3,7 @@ services:
   ldap-check:
     build: .
     environment:
-      verifier_type: io.confluent.security.auth.provider.ldap.AuthenticationVerifier
+      verifier_type: io.confluent.security.auth.provider.ldap.GroupVerifier
       username: kafka
       password: kafka-secret
 
@@ -25,6 +25,8 @@ services:
       ldap_user_search_base: dc=test,dc=com
       ldap_user_object_class: organizationalRole
       ldap_user_name_attribute: cn
+      ldap_user_memberof_attribute: ""
+      ldap_user_memberof_attribute_pattern: ""
 
   # LDAP
   ldap:
