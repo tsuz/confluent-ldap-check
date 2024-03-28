@@ -33,6 +33,52 @@ accordingly and please let me know so that I can adjust it (or/and file a pull r
 
 ## How to run
 
+### Run with Docker
+
+1. Pull down repo
+
+```sh
+git clone git@github.com:sknop/confluent-ldap-check.git
+```
+
+2. build with docker compose
+
+```sh
+docker-compose build
+```
+
+3. update the environmental variables. The LDAP env vars with dots are replaced with underscores.
+
+4. bring up the instance
+
+```sh
+> docker-compose up
+
+confluent-ldap-check-ldap-check-1  | Running LDAP script
+confluent-ldap-check-ldap-check-1  | Verifier Type: 
+confluent-ldap-check-ldap-check-1  | Config File:
+confluent-ldap-check-ldap-check-1  | ldap.java.naming.provider.url=ldap://host.docker.internal:9389
+confluent-ldap-check-ldap-check-1  | ldap.java.naming.security.credentials=Developer!
+confluent-ldap-check-ldap-check-1  | ldap.java.naming.security.principal=cn=mds,dc=test,dc=com
+confluent-ldap-check-ldap-check-1  | ldap.java.naming.security.authentication=simple
+confluent-ldap-check-ldap-check-1  | ldap.search.mode=GROUPS
+confluent-ldap-check-ldap-check-1  | ldap.group.search.scope=2
+confluent-ldap-check-ldap-check-1  | ldap.group.search.base=dc=test,dc=com
+confluent-ldap-check-ldap-check-1  | ldap.group.object.class=posixGroup
+confluent-ldap-check-ldap-check-1  | ldap.group.name.attribute=cn
+confluent-ldap-check-ldap-check-1  | ldap.group.member.attribute.pattern=cn=([^,]*)(?:.*)dc=test,dc=com
+confluent-ldap-check-ldap-check-1  | ldap.group.member.attribute=member
+confluent-ldap-check-ldap-check-1  | ldap.user.search.scope=2
+confluent-ldap-check-ldap-check-1  | ldap.user.search.base=dc=test,dc=com
+confluent-ldap-check-ldap-check-1  | ldap.user.object.class=organizationalRole
+confluent-ldap-check-ldap-check-1  | ldap.user.name.attribute=cn
+confluent-ldap-check-ldap-check-1  | Command Result:
+confluent-ldap-check-ldap-check-1  | User 'kafka' has been authenticated
+confluent-ldap-check-ldap-check-1 exited with code 0
+```
+
+### Run locally
+
 Package JAR:
 
 ```shell

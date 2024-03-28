@@ -1,5 +1,31 @@
 version: '3.8'
 services:
+  ldap-check:
+    build: .
+    environment:
+      verifier_type: io.confluent.security.auth.provider.ldap.AuthenticationVerifier
+      username: kafka
+      password: kafka-secret
+
+      ldap_java_naming_provider_url: ldap://host.docker.internal:9389
+      ldap_java_naming_security_principal: cn=mds,dc=test,dc=com
+      ldap_java_naming_security_credentials: Developer!
+      ldap_java_naming_security_authentication: simple
+
+      ldap_search_mode: GROUPS
+
+      ldap_group_search_scope: 2
+      ldap_group_search_base: dc=test,dc=com
+      ldap_group_object_class: posixGroup
+      ldap_group_name_attribute: cn
+      ldap_group_member_attribute_pattern: cn=([^,]*)(?:.*)dc=test,dc=com
+      ldap_group_member_attribute: member
+
+      ldap_user_search_scope: 2
+      ldap_user_search_base: dc=test,dc=com
+      ldap_user_object_class: organizationalRole
+      ldap_user_name_attribute: cn
+
   # LDAP
   ldap:
     image: osixia/openldap:1.5.0
