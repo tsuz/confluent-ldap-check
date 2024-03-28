@@ -33,15 +33,9 @@ accordingly and please let me know so that I can adjust it (or/and file a pull r
 
 ## How to run
 
-### Run with Docker
+### Run with Docker Compose
 
-Pull down repo
-
-```sh
-git clone git@github.com:sknop/confluent-ldap-check.git
-```
-
-Build with docker compose
+Build with docker compose from source
 
 ```sh
 docker-compose build
@@ -75,6 +69,43 @@ confluent-ldap-check-ldap-check-1  | ldap.user.name.attribute=cn
 confluent-ldap-check-ldap-check-1  | Command Result:
 confluent-ldap-check-ldap-check-1  | User 'kafka' has been authenticated
 confluent-ldap-check-ldap-check-1 exited with code 0
+```
+
+### Run with Docker
+
+Build with docker from source
+
+```sh
+docker-compose build . -t ldap-image-test
+```
+
+Update the environmental variables in docker-compose.yml. The LDAP env vars with dots are replaced with underscores.
+
+Run the verifier
+
+```sh
+docker run \
+-e verifier_type=io.confluent.security.auth.provider.ldap.AuthenticationVerifier \
+-e username=kafka \
+-e password=kafka-secret \
+-e ldap_java_naming_provider_url=ldap://host.docker.internal:9389 \
+-e ldap_java_naming_security_principal=cn=mds,dc=test,dc=com \
+-e ldap_java_naming_security_authentication=simple \
+-e ldap_java_naming_security_credentials=Developer! \
+-e ldap_search_mode=GROUPS \
+-e ldap_group_search_scope=2 \
+-e ldap_group_search_base=dc=test,dc=com \
+-e ldap_group_object_class=posixGroup \
+-e ldap_group_name_attribute=cn \
+-e ldap_group_member_attribute_pattern="cn=([^,]*)(?:.*)dc=test,dc=com" \
+-e ldap_group_member_attribute=member \
+-e ldap_user_search_scope=2 \
+-e ldap_user_search_base=dc=test,dc=com \
+-e ldap_user_object_class=organizationalRole \
+-e ldap_user_name_attribute=cn \
+-e ldap_user_memberof_attribute=member \
+-e ldap_user_memberof_attribute_pattern=a \
+ldap-image-test
 ```
 
 ### Run locally
