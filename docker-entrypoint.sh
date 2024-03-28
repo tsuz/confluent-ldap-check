@@ -28,8 +28,7 @@ cat $CONFIG_FILE
 
 echo "Command Result:"
 
-if [ $verifier_type = "io.confluent.security.auth.provider.ldap.GroupVerifier
-" ]; then
+if [ $verifier_type = "io.confluent.security.auth.provider.ldap.GroupVerifier" ]; then
   java -cp /home/app/target/confluent-ldap-check-1.0.0.jar \
       $verifier_type -c \
       $CONFIG_FILE
